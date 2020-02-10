@@ -9,6 +9,14 @@ for details.
 - We detest usage of our software or scientific outcome to promote racial discrimination.
 ```
 
+### Reference
+
+* ["Localizing components of shared transethnic genetic architecture of complex traits from GWAS summary data." bioRxiv 2019](https://www.biorxiv.org/content/10.1101/858431v2)
+
+### See also
+
+* ["Population-specific causal disease effect sizes in functionally important regions impacted by selection." bioRxiv 2019](https://www.biorxiv.org/content/10.1101/803452v2)
+
 ---
 
 ### Contact

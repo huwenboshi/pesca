@@ -2,8 +2,9 @@
 site_name: 'PESCA'
 site_description: 'Estimating proportion of population-specific and shared causal variants'
 site_author: 'Huwenbo Shi'
+
 site_url: 'https://huwenboshi.github.io/pesca'
-edit_uri: null
+edit_uri: ''
 
 # Repository
 repo_url: 'https://github.com/huwenboshi/pesca'
