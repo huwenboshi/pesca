@@ -106,14 +106,13 @@
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#estimating-genome-wide-proportion-of-population-specific-and-shared">Estimating genome-wide proportion of population-specific and shared</a></li>
+        <li class="main active"><a href="#estimating-genome-wide-proportion-of-population-specific-and-shared-causal-variants">Estimating genome-wide proportion of population-specific and shared causal variants</a></li>
             <li><a href="#typical-command">Typical command</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="estimating-genome-wide-proportion-of-population-specific-and-shared">Estimating genome-wide proportion of population-specific and shared</h1>
-<p>causal variants</p>
+<h1 id="estimating-genome-wide-proportion-of-population-specific-and-shared-causal-variants">Estimating genome-wide proportion of population-specific and shared causal variants</h1>
 <p>This page describes the pipeline to estimate the genome-wide prior
 probabilities of a SNP to be causal in one population (i.e.
 population-specific) or in both populations (i.e. shared).</p>
@@ -134,7 +133,16 @@ causal variants via the following command.</p>
     <span class="o">--</span><span class="nv">totnsnp</span> <span class="o">&lt;</span><span class="nv">total</span> <span class="nv">number</span> <span class="nv">of</span> <span class="nv">SNPs</span> <span class="nv">in</span> <span class="nv">the</span> <span class="nv">list</span> <span class="nv">of</span> <span class="nv">GWAS</span> <span class="nv">summary</span> <span class="nv">statistics</span> <span class="nv">files</span><span class="o">&gt;</span> \
     <span class="o">--</span><span class="nv">max_iter</span> <span class="o">&lt;</span><span class="nv">maximum</span> <span class="nv">number</span> <span class="nv">of</span> <span class="nv">EM</span> <span class="nv">iterations</span><span class="o">&gt;</span> \
     <span class="o">--</span><span class="nv">out</span> <span class="o">&lt;</span><span class="nv">output</span> <span class="nv">file</span> <span class="nv">name</span><span class="o">&gt;</span>
-</code></pre></div></div>
+</code></pre></div>
+
+
+<p>Here are the meaning of the flags:</p>
+<ul>
+<li><code>--model</code> tells PESCA whether to estimate genome-wide prior or per-SNP
+posterior probabilities. There are two options for this flag <code>fit</code> and <code>post</code>.
+For estimating per-SNP posterior see
+<a href="https://huwenboshi.github.io/pesca/posterior/">here</a>.</li>
+</ul></div>
         </div>
 
         <footer class="col-md-12">
