@@ -1,0 +1,53 @@
+# Project information
+site_name: 'PESCA'
+site_description: 'Estimating proportion of population-specific and shared causal variants'
+site_author: 'Huwenbo Shi'
+site_url: 'https://huwenboshi.github.io/pesca'
+
+# Repository
+repo_url: 'https://github.com/huwenboshi/pesca'
+
+# Copyright
+copyright: 'Copyright &copy; 2020 - 2025 Huwenbo Shi'
+
+# Documentation and theme
+theme: 'mkdocs'
+
+# define pages
+pages:
+    - Home: 'index.md'
+    - Input Format: 'input_format.md'
+    - Estimation:
+        - 'Prior': 'prior.md'
+        - 'Posterior': 'posterior.md'
+    - FAQ: 'faq.md'
+
+# Options
+extra:
+  palette:
+    primary: 'indigo'
+    accent: 'indigo'
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
+  social:
+    - type: 'github'
+      link: 'https://github.com/huwenboshi'
+    - type: 'twitter'
+      link: 'https://twitter.com/shihuwenbo'
+
+# Google Analytics
+google_analytics:
+  - 'UA-XXXXXXXX-X'
+  - 'auto'
+
+# Extensions
+markdown_extensions:
+  - mdx_math
+  - admonition
+  - codehilite
+  - toc
+
+extra_javascript:
+  - https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML
+  - assets/mathjaxhelper.js
