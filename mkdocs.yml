@@ -20,8 +20,8 @@ pages:
     - Home: 'index.md'
     - Input Format: 'input_format.md'
     - Estimation:
-        - 'Prior': 'prior.md'
-        - 'Posterior': 'posterior.md'
+        - 'Estimating genome-wide priors': 'prior.md'
+        - 'Estimating per-SNP posteriors': 'posterior.md'
     - FAQ: 'faq.md'
 
 # Options

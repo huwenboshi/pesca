@@ -9,7 +9,7 @@ causal variants from GWAS summary statistics.
 ### For compiling and running PESCA
 
 * g++ (version 4.7.2)
-* boost C++ library (1.55)
+* [boost C++ library (1.55)](https://www.boost.org/)
 * BLAS library
 
 To compile the PESCA program, please `cd` into `src/`, and then type `make`.
