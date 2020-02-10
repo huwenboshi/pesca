@@ -148,7 +148,56 @@ For estimating per-SNP posterior see
 <p><code>--zscore1</code> specifies a text file containing a list of paths to GWAS
 summary statistics for population 1, one path per line. Typically, there
 should be one such text file for each chromosome. And each line in the text
-file corresponds to GWAS summary statistics of one region on that chromosome.</p>
+file corresponds to GWAS summary statistics of one region on that chromosome.
+See <a href="https://huwenboshi.github.io/pesca/input_format/#gwas-summary-statistics-data">here</a>
+for format of GWAS summary statistics data for PESCA.</p>
+</li>
+<li>
+<p><code>--zscore2</code> specifies a text file containing a list of paths to GWAS
+summary statistics for population 2, one path per line. Typically, there
+should be one such text file for each chromosome. And each line in the text
+file corresponds to GWAS summary statistics of one region on that chromosome.
+See <a href="https://huwenboshi.github.io/pesca/input_format/#gwas-summary-statistics-data">here</a>
+for format of GWAS summary statistics data for PESCA.</p>
+</li>
+<li>
+<p><code>--ld1</code> specifies a text file containing a list of paths to LD matrices
+for population 1, one path per line. Typically, there should be one such
+text file for each chromosome. And each line in the text file corresponds
+to LD matrix of one region on that chromosome. Additionally, each line
+in the text file should correspond to the same region listed by the
+<code>--zscore1</code> flag.</p>
+</li>
+<li>
+<p><code>--ld2</code> specifies a text file containing a list of paths to LD matrices
+for population 2, one path per line. Typically, there should be one such
+text file for each chromosome. And each line in the text file corresponds
+to LD matrix of one region on that chromosome. Additionally, each line
+in the text file should correspond to the same region listed by the
+<code>--zscore2</code> flag.</p>
+</li>
+<li>
+<p><code>--nburn</code> specifies the number of burn-ins for the MCMC. The default is 5000.</p>
+</li>
+<li>
+<p><code>--nsample</code> specifies the number of samples for the MCMC. The default is 5000.</p>
+</li>
+<li>
+<p><code>--sigmasq1</code> specifies genome-wide SNP-heritability (e.g. estimated by
+LDSC) for population 1 multiplied by sample size of the GWAS in population 1.</p>
+</li>
+<li>
+<p><code>--sigmasq2</code> specifies genome-wide SNP-heritability (e.g. estimated by
+LDSC) for population 2 multiplied by sample size of the GWAS in population 2.</p>
+</li>
+<li>
+<p><code>--totnsnp</code> specifies total number of SNPs across all chromosomes.</p>
+</li>
+<li>
+<p><code>--max_iter</code> specifies maximum number of EM iterations. The default is 200.</p>
+</li>
+<li>
+<p><code>--out</code> specifies the output file name.</p>
 </li>
 </ul></div>
         </div>
