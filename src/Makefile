@@ -1,6 +1,6 @@
 CC = g++
 
-EIGEN = /u/project/pasaniuc/shihuwen/software/eigen-3.3.3
+EIGEN = ./eigen-3.3.3
 COPTS =	-I$(EIGEN) -lblas -w -O3 -lboost_program_options -std=c++11 
 
 BINS = pesca

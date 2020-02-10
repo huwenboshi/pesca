@@ -8,6 +8,9 @@ causal variants from GWAS summary statistics.
 
 ### For compiling and running PESCA
 
+* g++ (version 4.7.2)
+* boost C++ library ()
+
 ### Python requirement
 
 * [Python 2.7](https://www.python.org/download/releases/2.7/) (sorry!)
