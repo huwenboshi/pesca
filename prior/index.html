@@ -120,20 +120,20 @@ population-specific) or in both populations (i.e. shared).</p>
 <h3 id="typical-command">Typical command</h3>
 <p>PESCA estimates genome-wide proportions of population-specific and shared
 causal variants via the following command.</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&lt;</span><span class="nv">directory</span> <span class="nv">to</span> <span class="nv">pesca</span><span class="o">&gt;/</span><span class="nv">pesca</span> \
-    <span class="o">--</span><span class="nv">mode</span> <span class="nv">fit</span> \
-    <span class="o">--</span><span class="nv">zscore1</span> <span class="o">&lt;</span><span class="nv">list</span> <span class="nv">of</span> <span class="nv">GWAS</span> <span class="nv">summary</span> <span class="nv">statistics</span> <span class="nv">files</span> <span class="k">for</span> <span class="nv">population</span> <span class="mi">1</span><span class="o">&gt;</span> \
-    <span class="o">--</span><span class="nv">zscore2</span> <span class="o">&lt;</span><span class="nv">list</span> <span class="nv">of</span> <span class="nv">GWAS</span> <span class="nv">summary</span> <span class="nv">statistics</span> <span class="nv">files</span> <span class="k">for</span> <span class="nv">population</span> <span class="mi">2</span><span class="o">&gt;</span> \
-    <span class="o">--</span><span class="nv">ld1</span> <span class="o">&lt;</span><span class="nv">list</span> <span class="nv">of</span> <span class="nv">LD</span> <span class="nv">files</span> <span class="k">for</span> <span class="nv">population</span> <span class="mi">1</span><span class="o">&gt;</span> \
-    <span class="o">--</span><span class="nv">ld2</span> <span class="o">&lt;</span><span class="nv">list</span> <span class="nv">of</span> <span class="nv">LD</span> <span class="nv">files</span> <span class="k">for</span> <span class="nv">population</span> <span class="mi">2</span><span class="o">&gt;</span> \
-    <span class="o">--</span><span class="nv">nburn</span> <span class="o">&lt;</span><span class="nv">number</span> <span class="nv">of</span> <span class="nv">MCMC</span> <span class="nv">burn</span><span class="o">-</span><span class="nv">ins</span>, <span class="mi">5000</span> <span class="nv">by</span> <span class="nv">default</span><span class="o">&gt;</span> \
-    <span class="o">--</span><span class="nv">nsample</span> <span class="o">&lt;</span><span class="nv">number</span> <span class="nv">of</span> <span class="nv">MCMC</span> <span class="nv">samples</span>, <span class="mi">5000</span> <span class="nv">by</span> <span class="nv">default</span><span class="o">&gt;</span> \
-    <span class="o">--</span><span class="nv">lambda</span> <span class="o">&lt;</span><span class="nv">shrinkage</span> <span class="nv">parameter</span><span class="o">&gt;</span> \
-    <span class="o">--</span><span class="nv">sigmasq1</span> $<span class="nv">sigmasq1</span> \
-    <span class="o">--</span><span class="nv">sigmasq2</span>  $<span class="nv">sigmasq2</span> \
-    <span class="o">--</span><span class="nv">totnsnp</span> <span class="o">&lt;</span><span class="nv">total</span> <span class="nv">number</span> <span class="nv">of</span> <span class="nv">SNPs</span> <span class="nv">in</span> <span class="nv">the</span> <span class="nv">list</span> <span class="nv">of</span> <span class="nv">GWAS</span> <span class="nv">summary</span> <span class="nv">statistics</span> <span class="nv">files</span><span class="o">&gt;</span> \
-    <span class="o">--</span><span class="nv">max_iter</span> <span class="o">&lt;</span><span class="nv">maximum</span> <span class="nv">number</span> <span class="nv">of</span> <span class="nv">EM</span> <span class="nv">iterations</span><span class="o">&gt;</span> \
-    <span class="o">--</span><span class="nv">out</span> <span class="o">&lt;</span><span class="nv">output</span> <span class="nv">file</span> <span class="nv">name</span><span class="o">&gt;</span>
+<div class="codehilite"><pre><span></span><code>&lt;directory to pesca&gt;/pesca \
+    --mode fit \
+    --zscore1 &lt;list of GWAS summary statistics files for population 1&gt; \
+    --zscore2 &lt;list of GWAS summary statistics files for population 2&gt; \
+    --ld1 &lt;list of LD files for population 1&gt; \
+    --ld2 &lt;list of LD files for population 2&gt; \
+    --nburn &lt;number of MCMC burn-ins, 5000 by default&gt; \
+    --nsample &lt;number of MCMC samples, 5000 by default&gt; \
+    --lambda &lt;shrinkage parameter&gt; \
+    --sigmasq1 $sigmasq1 \
+    --sigmasq2  $sigmasq2 \
+    --totnsnp &lt;total number of SNPs in the list of GWAS summary statistics files&gt; \
+    --max_iter &lt;maximum number of EM iterations&gt; \
+    --out &lt;output file name&gt;
 </code></pre></div></div>
         </div>
 
