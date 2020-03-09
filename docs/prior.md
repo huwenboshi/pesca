@@ -4,7 +4,17 @@ This page describes the pipeline to estimate the genome-wide prior
 probabilities of a SNP to be causal in one population (i.e.
 population-specific) or in both populations (i.e. shared).
 
-### Command for running PESCA
+### Recommended pipeline
+
+#### Step 1 -- estimate heritability of the trait
+
+This step can be performend using [LDSC](https://github.com/bulik/ldsc/wiki/Heritability-and-Genetic-Correlation).
+
+#### Step 2 -- extract summary statistics and LD of each region
+
+#### Step 3 -- run PESCA
+
+Command for running PESCA
 
 PESCA estimates genome-wide proportions of population-specific and shared
 causal variants via the following command.
