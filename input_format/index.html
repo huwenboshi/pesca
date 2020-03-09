@@ -115,6 +115,29 @@
 
 <h1 id="input-format">Input Format</h1>
 <h2 id="gwas-summary-statistics-data">GWAS summary statistics data</h2>
+<p>GWAS summary statistics data should have the following columns, ordered as
+listed below.</p>
+<ul>
+<li>
+<p><code>SNP</code>: rs ID of the SNP (e.g. rs62442)</p>
+</li>
+<li>
+<p><code>BP</code>: Chromosome number of the SNP. This should be a number between 1 and 22.</p>
+</li>
+<li>
+<p><code>A2</code>: Effect allele (i.e. trait increasing allele) of the SNP. The sign of
+Z-score is with respect to this allele.</p>
+</li>
+<li>
+<p><code>A1</code>: The other allele of the SNP.</p>
+</li>
+<li>
+<p><code>Z</code>: Z-score of the SNP.</p>
+</li>
+<li>
+<p><code>N</code>: Sample size.</p>
+</li>
+</ul>
 <h2 id="ld-matrix">LD matrix</h2></div>
         </div>
 
