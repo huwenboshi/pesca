@@ -114,7 +114,7 @@
                 <div class="col-md-9" role="main">
 
 <h1 id="input-format">Input Format</h1>
-<p>This page describes file format of GWAS summary statistics data and LD matrix
+<p>This page describes file formats of GWAS summary statistics data and LD matrix
 used by PESCA.</p>
 <h2 id="gwas-summary-statistics-data">GWAS summary statistics data</h2>
 <p>GWAS summary statistics data should have the following columns, ordered as
@@ -130,11 +130,20 @@ Z-score is with respect to this allele.</li>
 </ul>
 <p>There should be a GWAS summary statistics file for each non-overlapping
 region. A lsit of GWAS summary statistics files can be specified to PESCA
-using the <code>--zscore1</code> and <code>--zscore2</code> (one flag for each population) flags.
+through the <code>--zscore1</code> and <code>--zscore2</code> (one flag for each population) flags.
 This list file should contain the paths to GWAS summary statistics of
 multiple regions, one path per line. Typically, there should be one such list
 for for each chromosome.</p>
-<h2 id="ld-matrix">LD matrix</h2></div>
+<h2 id="ld-matrix">LD matrix</h2>
+<p>The LD matrix file is a text file that stores the LD matrix of a region. Each
+LD matrix file should correspond to a GWAS summary statistics file of a
+region. There should be M lines and M columns in the LD matrix file, where M
+is the number of SNPs in the region.</p>
+<p>A list of LD matrix files can be specified to PESCA through the <code>--ld1</code> and
+<code>--ld2</code> flags (one flag for each population). This list file should contain
+the paths to LD matrix file of multiple regions, one path per line. Each
+line in the list of LD matrix file should correpond to a line in the list
+of GWAS summary statistics file.</p></div>
         </div>
 
         <footer class="col-md-12">
