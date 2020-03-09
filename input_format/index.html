@@ -128,6 +128,16 @@ Z-score is with respect to this allele.</li>
 <li><code>Z</code>: Z-score of the SNP.</li>
 <li><code>N</code>: Sample size.</li>
 </ul>
+<p>The following is an example of GWAS summary statistics file.</p>
+<div class="codehilite"><pre><span></span><code>SNP     BP      A2      A1      Z       N 
+rs131529        16870162        A       G       0.9857549999999999      50000
+rs131538        16871137        G       A       1.382624        50000
+rs131545        16871951        G       A       1.3048819999999999      50000
+rs140375        16873251        C       A       1.494041        50000
+rs131566        16879530        G       A       0.9811850000000001      50000
+</code></pre></div>
+
+
 <p>There should be a GWAS summary statistics file for each non-overlapping
 region. A lsit of GWAS summary statistics files can be specified to PESCA
 through the <code>--zscore1</code> and <code>--zscore2</code> (one flag for each population) flags.
