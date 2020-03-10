@@ -108,6 +108,7 @@
     <ul class="nav bs-sidenav">
         <li class="main active"><a href="#input-format">Input Format</a></li>
             <li><a href="#gwas-summary-statistics-data">GWAS summary statistics data</a></li>
+            <li><a href="#gwas-summary-statistics-data-list-file">GWAS summary statistics data list file</a></li>
             <li><a href="#ld-matrix">LD matrix</a></li>
     </ul>
 </div></div>
@@ -140,11 +141,22 @@ rs131566        16879530        G       A       0.9811850000000001      50000
 
 
 <p>There should be a GWAS summary statistics file for each non-overlapping
-region. A lsit of GWAS summary statistics files can be specified to PESCA
-through the <code>--zscore1</code> and <code>--zscore2</code> (one flag for each population) flags.
-This list file should contain the paths to GWAS summary statistics of
-multiple regions, one path per line. Typically, there should be one such list
-for for each chromosome.</p>
+region.</p>
+<h2 id="gwas-summary-statistics-data-list-file">GWAS summary statistics data list file</h2>
+<p>GWAS summary statistics data list file contains a list of paths to GWAS
+summary statistics data split by region. Typically, there should be one such
+list file for each chromosome and each population. A lsit of GWAS summary
+statistics files can be specified to PESCA through the <code>--zscore1</code> and
+<code>--zscore2</code> (one flag for each population) flags.</p>
+<p>The following is an example of GWAS summary statistics data list file.</p>
+<div class="codehilite"><pre><span></span><code>/&lt;path&gt;/&lt;to&gt;/&lt;GWAS&gt;/&lt;summary&gt;/&lt;data&gt;/region1_zscore_pop1.txt
+/&lt;path&gt;/&lt;to&gt;/&lt;GWAS&gt;/&lt;summary&gt;/&lt;data&gt;/region2_zscore_pop1.txt
+                            ...
+/&lt;path&gt;/&lt;to&gt;/&lt;GWAS&gt;/&lt;summary&gt;/&lt;data&gt;/region100_zscore_pop1.txt
+                            ...
+</code></pre></div>
+
+
 <h2 id="ld-matrix">LD matrix</h2>
 <p>The LD matrix file is a text file that stores the LD matrix of a region. Each
 LD matrix file should correspond to a GWAS summary statistics file of a
