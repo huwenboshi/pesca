@@ -166,13 +166,22 @@ Format of LD matrix can be found <a href="https://huwenboshi.github.io/pesca/inp
 </code></pre></div>
 
 
-<p>Here, <code>chr1_region1_zscore_pop1.txt</code> and <code>chr1_region2_zscore_pop2.txt</code> are
+<p><code>chr1_region1_zscore_pop1.txt</code> and <code>chr1_region2_zscore_pop2.txt</code> are
 the GWAS summary statistics data files in chromosome 1 region 1 for
 population 1 and 2 respectively
 (see <a href="https://huwenboshi.github.io/pesca/input_format/#gwas-summary-statistics-data">here</a>
-for information on format). <code>chr1_region1_ld_pop1.txt</code> and <code>chr1_region1_ld_pop2.txt</code>
+for format).</p>
+<p><code>chr1_region1_ld_pop1.txt</code> and <code>chr1_region1_ld_pop2.txt</code>
 are the corresponding LD matrices (see <a href="https://huwenboshi.github.io/pesca/input_format/#ld-matrix">here</a>
 for format).</p>
+<p><code>chr1_zscore_list_pop1.txt</code> is a list of paths to all the <code>chr1_region*_zscore_pop1.txt</code>
+files, i.e. GWAS summary statistics data in all regions on chromosome 1 for
+population 1. <code>chr1_zscore_list_pop2.txt</code> is a list of paths to all the
+<code>chr1_region*_zscore_pop2.txt</code> files.</p>
+<p><code>chr1_ld_list_pop1.txt</code> is a list of paths to all the <code>chr1_region*_ld_pop1.txt</code>
+files, i.e. LD matrices for all regions on chromosome 1 for
+population 1. <code>chr1_ld_list_pop2.txt</code> is a list of paths to all the
+<code>chr1_region*_ld_pop2.txt</code> files.</p>
 <h4 id="step-3-run-pesca-for-each-chromosome">Step 3: run PESCA for each chromosome</h4>
 <p>Command for running PESCA</p>
 <p>PESCA estimates genome-wide proportions of population-specific and shared
