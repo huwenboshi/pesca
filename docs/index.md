@@ -23,6 +23,21 @@ To compile the PESCA program, please `cd` into `src/`, and then type `make`.
 * [SciPy 1.1.0+](https://www.scipy.org/)
 * [StatsModels 0.9.0+](https://www.statsmodels.org/0.9.0/index.html)
 
+## Data
+
+### Genome partition
+
+We provide definitions of regions that are approximately independent in
+EAS and EUR [here](https://github.com/huwenboshi/pesca/tree/master/partition).
+
+### Reference panel
+
+Reference panels should be in [PLINK format](https://www.cog-genomics.org/plink/2.0/input#bed).
+
+We provide 1000 Genomes reference panel for EAS and EUR [here](https://ucla.box.com/s/o3k9nhosmtjgjufvjjfcshbjynkko8j5).
+All SNPs in this reference panel have minor allele frequency greater than 5%
+in both populations, and have been LD pruned with \\(R^2\\) threshold of 0.95.
+
 ## Contact
 
 * **Huwenbo Shi**: hshi_AT_hsph.harvard.edu

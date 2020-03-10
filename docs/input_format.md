@@ -28,11 +28,25 @@ rs131566        16879530        G       A       0.9811850000000001      50000
 ```
 
 There should be a GWAS summary statistics file for each non-overlapping
-region. A lsit of GWAS summary statistics files can be specified to PESCA
-through the `--zscore1` and `--zscore2` (one flag for each population) flags.
-This list file should contain the paths to GWAS summary statistics of
-multiple regions, one path per line. Typically, there should be one such list
-for for each chromosome.
+region.
+
+## GWAS summary statistics data list file
+
+GWAS summary statistics data list file contains a list of paths to GWAS
+summary statistics data split by region. Typically, there should be one such
+list file for each chromosome and each population. A lsit of GWAS summary
+statistics files can be specified to PESCA through the `--zscore1` and
+`--zscore2` (one flag for each population) flags.
+
+The following is an example of GWAS summary statistics data list file.
+
+```text
+/<path>/<to>/<GWAS>/<summary>/<data>/region1_zscore_pop1.txt
+/<path>/<to>/<GWAS>/<summary>/<data>/region2_zscore_pop1.txt
+                            ...
+/<path>/<to>/<GWAS>/<summary>/<data>/region100_zscore_pop1.txt
+                            ...
+```
 
 ## LD matrix
 
@@ -50,8 +64,27 @@ The following is an example of a LD matrix file.
 -0.0339536 -0.0588997 0.0562084 0.048621 1
 ```
 
-A list of LD matrix files can be specified to PESCA through the `--ld1` and
-`--ld2` flags (one flag for each population). This list file should contain
-the paths to LD matrix file of multiple regions, one path per line. Each
-line in the list of LD matrix file should correpond to a line in the list
-of GWAS summary statistics file.
+## LD matrix list file
+
+LD matrix list file contains a list of paths to LD matrices split by region.
+Typically, there should be one such list file for each chromosome and each
+population. LD matrix list files can be specified to PESCA through the
+`--ld1` and `--ld2` (one flag for each population) flags.
+
+The following is an example of LD matrixlist file.
+
+```text
+/<path>/<to>/<GWAS>/<summary>/<data>/region1_ld_pop1.txt
+/<path>/<to>/<GWAS>/<summary>/<data>/region2_ld_pop1.txt
+                            ...
+/<path>/<to>/<GWAS>/<summary>/<data>/region100_ld_pop1.txt
+                            ...
+```
+
+LD matrix list files can be specified to PESCA through the `--ld1` and
+`--ld2` flags (one flag for each population).
+
+<div style="background-color:rgba(230, 230, 250, 1.0);">
+( <b>Note</b>: Each line in the list of LD matrix file should correpond to a
+line in the list of GWAS summary statistics file. )
+</div>

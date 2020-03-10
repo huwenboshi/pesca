@@ -108,7 +108,9 @@
     <ul class="nav bs-sidenav">
         <li class="main active"><a href="#input-format">Input Format</a></li>
             <li><a href="#gwas-summary-statistics-data">GWAS summary statistics data</a></li>
+            <li><a href="#gwas-summary-statistics-data-list-file">GWAS summary statistics data list file</a></li>
             <li><a href="#ld-matrix">LD matrix</a></li>
+            <li><a href="#ld-matrix-list-file">LD matrix list file</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
@@ -140,11 +142,22 @@ rs131566        16879530        G       A       0.9811850000000001      50000
 
 
 <p>There should be a GWAS summary statistics file for each non-overlapping
-region. A lsit of GWAS summary statistics files can be specified to PESCA
-through the <code>--zscore1</code> and <code>--zscore2</code> (one flag for each population) flags.
-This list file should contain the paths to GWAS summary statistics of
-multiple regions, one path per line. Typically, there should be one such list
-for for each chromosome.</p>
+region.</p>
+<h2 id="gwas-summary-statistics-data-list-file">GWAS summary statistics data list file</h2>
+<p>GWAS summary statistics data list file contains a list of paths to GWAS
+summary statistics data split by region. Typically, there should be one such
+list file for each chromosome and each population. A lsit of GWAS summary
+statistics files can be specified to PESCA through the <code>--zscore1</code> and
+<code>--zscore2</code> (one flag for each population) flags.</p>
+<p>The following is an example of GWAS summary statistics data list file.</p>
+<div class="codehilite"><pre><span></span><code>/&lt;path&gt;/&lt;to&gt;/&lt;GWAS&gt;/&lt;summary&gt;/&lt;data&gt;/region1_zscore_pop1.txt
+/&lt;path&gt;/&lt;to&gt;/&lt;GWAS&gt;/&lt;summary&gt;/&lt;data&gt;/region2_zscore_pop1.txt
+                            ...
+/&lt;path&gt;/&lt;to&gt;/&lt;GWAS&gt;/&lt;summary&gt;/&lt;data&gt;/region100_zscore_pop1.txt
+                            ...
+</code></pre></div>
+
+
 <h2 id="ld-matrix">LD matrix</h2>
 <p>The LD matrix file is a text file that stores the LD matrix of a region. Each
 LD matrix file should correspond to a GWAS summary statistics file of a
@@ -159,11 +172,26 @@ is the number of SNPs in the region.</p>
 </code></pre></div>
 
 
-<p>A list of LD matrix files can be specified to PESCA through the <code>--ld1</code> and
-<code>--ld2</code> flags (one flag for each population). This list file should contain
-the paths to LD matrix file of multiple regions, one path per line. Each
-line in the list of LD matrix file should correpond to a line in the list
-of GWAS summary statistics file.</p></div>
+<h2 id="ld-matrix-list-file">LD matrix list file</h2>
+<p>LD matrix list file contains a list of paths to LD matrices split by region.
+Typically, there should be one such list file for each chromosome and each
+population. LD matrix list files can be specified to PESCA through the
+<code>--ld1</code> and <code>--ld2</code> (one flag for each population) flags.</p>
+<p>The following is an example of LD matrixlist file.</p>
+<div class="codehilite"><pre><span></span><code>/&lt;path&gt;/&lt;to&gt;/&lt;GWAS&gt;/&lt;summary&gt;/&lt;data&gt;/region1_ld_pop1.txt
+/&lt;path&gt;/&lt;to&gt;/&lt;GWAS&gt;/&lt;summary&gt;/&lt;data&gt;/region2_ld_pop1.txt
+                            ...
+/&lt;path&gt;/&lt;to&gt;/&lt;GWAS&gt;/&lt;summary&gt;/&lt;data&gt;/region100_ld_pop1.txt
+                            ...
+</code></pre></div>
+
+
+<p>LD matrix list files can be specified to PESCA through the <code>--ld1</code> and
+<code>--ld2</code> flags (one flag for each population).</p>
+<div style="background-color:rgba(230, 230, 250, 1.0);">
+( <b>Note</b>: Each line in the list of LD matrix file should correpond to a
+line in the list of GWAS summary statistics file. )
+</div></div>
         </div>
 
         <footer class="col-md-12">
