@@ -3,14 +3,14 @@
 This page describes the pipeline to estimate the posterior probabilities of a
 SNP being population-specific and shared.
 
-### Recommended pipeline
+## Recommended pipeline
 
-#### Step 0: estimate genome-wide prior probabilities
+### Step 0: estimate genome-wide prior probabilities
 
 This step should be performend following steps described
 [here](https://huwenboshi.github.io/pesca/prior/).
 
-#### Step 1: estimate per-SNP posterior probabilities
+### Step 1: estimate per-SNP posterior probabilities
 
 PESCA estimates per-SNP posterior probabilities of each SNP beling
 population-specific and shared via the following command. This step could be
