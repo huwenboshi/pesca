@@ -11,6 +11,12 @@ for details.
 
 ---
 
+### Releases
+
+* [version 0.1-beta](https://github.com/huwenboshi/pesca/archive/v0.1-beta.tar.gz)
+
+---
+
 ### Reference
 
 * ["Localizing components of shared transethnic genetic architecture of complex traits from GWAS summary data." bioRxiv 2019](https://www.biorxiv.org/content/10.1101/858431v2)
