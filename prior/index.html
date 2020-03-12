@@ -121,7 +121,7 @@ population-specific) or in both populations (i.e. shared).</p>
 <p>This step can be performend using <a href="https://github.com/bulik/ldsc/wiki/Heritability-and-Genetic-Correlation">LDSC</a>.</p>
 <div style="background-color:rgba(230, 230, 250, 1.0);">
 ( <b>Note</b>: This step should be performed using all SNPs without any
-MAF filtering or LD-pruning, except for those required by LDSC. )
+MAF filtering or LD pruning, except for those required by LDSC. )
 </div>
 
 <h4 id="step-2-extract-summary-statistics-and-ld-of-each-region-for-each-chromosome">Step 2: extract summary statistics and LD of each region for each chromosome</h4>
@@ -264,6 +264,13 @@ in the text file should correspond to the same region listed by the
 <li>
 <p><code>--nsample</code> specifies the number of samples for the MCMC. The default is 5000.</p>
 </li>
+</ul>
+<div style="background-color:rgba(230, 230, 250, 1.0);">
+( <b>Note</b>: This is the number of SNPs after intersecting with the
+reference panels, which have been MAF filtered and LD pruned. )
+</div>
+
+<ul>
 <li>
 <p><code>--sigmasq1</code> specifies genome-wide SNP-heritability (e.g. estimated by
 LDSC) for population 1 multiplied by sample size of the GWAS in population 1.</p>
