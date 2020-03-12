@@ -100,7 +100,7 @@ chromosome in parallel.
     --sigmasq2  $sigmasq2 \
     --totnsnp <total number of SNPs across all chromosomes> \
     --max_iter <maximum number of EM iterations> \
-    --out <output file name>
+    --out <output file name>_chr<chromosome #>
 ```
 
 Here are the meaning of the flags:
@@ -159,7 +159,7 @@ LDSC) for population 2 multiplied by sample size of the GWAS in population 2.
 
 * `--out` specifies the output file name.
 
-The following is an example output, `<output file name>.log`.
+The following is an example output, `<output file name>_chr<chromosome #>.log`.
 ```text
 iter    nsnp    q00     q01     q10     q11      f00     f01       f10       f11
 0       9960    9389.8  190.067 190.067 190.067  0       -3.9      -3.9      3.9
@@ -189,7 +189,33 @@ We use results from the last EM iteration as the final estimates.
 
 #### Step 3: aggregate results from all chromosomes
 
-After step 2, there should be one `<output file name>.log` for each
-chromosome.
+After step 2, there should be one `<output file name>_chr<chromosome #>.log`
+for each chromosome. To aggregate results from step 2 across chromosomes, we
+provide [parse_prior.py](https://github.com/huwenboshi/pesca/blob/master/misc/parse_prior.py).
+This script uses the average of the last 50 iterations of the log file to
+estimate genome-wide number of null SNPs (not causal in both populations),
+population 1 specific causal SNPs, population 2 specific causal SNPs, and 
+shared causal SNPs. The script can be run as follows.
 
+```
+python3 <path to script>/parse_prior.py \
+    --prefix <path to results from step 2>/<output file name>_chr
+```
 
+The following is an example output.
+```text
+number of SNPs
+q00 235640.05
+q01 275.53
+q10 376.20
+q11 21838.23
+
+MVB parameters
+f00 0.0000
+f01 -6.7514
+f10 -6.4399
+f11 10.8127
+```
+
+The MVB parameters will be used for estimating the
+[posterior probabilities](https://huwenboshi.github.io/pesca/posterior/).
