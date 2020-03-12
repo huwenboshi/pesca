@@ -4,9 +4,7 @@ This page describes the pipeline to estimate the genome-wide prior
 probabilities of a SNP to be causal in one population (i.e.
 population-specific) or in both populations (i.e. shared).
 
-## Recommended pipeline
-
-### Step 0: estimate genome-wide heritability of the trait
+#### Step 0: estimate genome-wide heritability of the trait
 
 This step can be performend using [LDSC](https://github.com/bulik/ldsc/wiki/Heritability-and-Genetic-Correlation).
 
@@ -15,7 +13,7 @@ This step can be performend using [LDSC](https://github.com/bulik/ldsc/wiki/Heri
 MAF filtering or LD pruning, except for those required by LDSC. )
 </div>
 
-### Step 1: extract summary statistics and LD of each region for each chromosome
+#### Step 1: extract summary statistics and LD of each region for each chromosome
 
 In this step, one
 
@@ -80,7 +78,7 @@ files, i.e. LD matrices for all regions on chromosome 1 for
 population 1. `chr1_ld_list_pop2.txt` is a list of paths to all the
 `chr1_region*_ld_pop2.txt` files.
 
-### Step 2: run PESCA for each chromosome
+#### Step 2: run PESCA for each chromosome
 
 PESCA estimates genome-wide proportions of population-specific and shared
 causal variants via the following command. This step could be run for each
@@ -187,7 +185,7 @@ iter    nsnp    q00     q01     q10     q11      f00     f01       f10       f11
 
 We use results from the last EM iteration as the final estimates.
 
-### Step 3: aggregate results from all chromosomes
+#### Step 3: aggregate results from all chromosomes
 
 After step 2, there should be one `<output file name>_chr<chromosome #>.log`
 for each chromosome. To aggregate results from step 2 across chromosomes, we
