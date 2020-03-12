@@ -32,3 +32,4 @@ in both populations, and have been LD pruned with \\(R^2\\) threshold of 0.95.
 ## Contact
 
 * **Huwenbo Shi**: hshi_AT_hsph.harvard.edu
+* **Kathy Burch**: kathy.s.burch_AT_gmail.com
