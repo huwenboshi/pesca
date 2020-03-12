@@ -106,20 +106,170 @@
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#estimating-posterior-probability-of-each-snp-being-population-specific-and-shared">Estimating posterior probability of each SNP being population-specific and shared</a></li>
+        <li class="main active"><a href="#estimating-posterior-probabilities-of-each-snp-being-population-specific-and-shared">Estimating posterior probabilities of each SNP being population-specific and shared</a></li>
             <li><a href="#recommended-pipeline">Recommended pipeline</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="estimating-posterior-probability-of-each-snp-being-population-specific-and-shared">Estimating posterior probability of each SNP being population-specific and shared</h1>
-<p>This page describes the pipeline to estimate the posterior probability of a
+<h1 id="estimating-posterior-probabilities-of-each-snp-being-population-specific-and-shared">Estimating posterior probabilities of each SNP being population-specific and shared</h1>
+<p>This page describes the pipeline to estimate the posterior probabilities of a
 SNP being population-specific and shared.</p>
 <h3 id="recommended-pipeline">Recommended pipeline</h3>
 <h4 id="step-0-estimate-genome-wide-prior-probabilities">Step 0: estimate genome-wide prior probabilities</h4>
 <p>This step should be performend following steps described
 <a href="https://huwenboshi.github.io/pesca/prior/">here</a>.</p>
-<h4 id="step-1-estimate-per-snp-posterior-probabilities">Step 1: estimate per-SNP posterior probabilities</h4></div>
+<h4 id="step-1-estimate-per-snp-posterior-probabilities">Step 1: estimate per-SNP posterior probabilities</h4>
+<p>PESCA estimates per-SNP posterior probabilities of each SNP beling
+population-specific and shared via the following command. This step could be
+run for each chromosome in parallel.</p>
+<div class="codehilite"><pre><span></span><code>&lt;directory to pesca&gt;/pesca \
+    --mode post \
+    --f00 &lt;MVB f00 parameter from step 0&gt; \
+    --f01 &lt;MVB f00 parameter from step 0&gt; \
+    --f10 &lt;MVB f00 parameter from step 0&gt; \
+    --f11 &lt;MVB f00 parameter from step 0&gt; \
+    --zscore1 &lt;list of GWAS summary statistics files for population 1&gt; \
+    --zscore2 &lt;list of GWAS summary statistics files for population 2&gt; \
+    --ld1 &lt;list of LD files for population 1&gt; \
+    --ld2 &lt;list of LD files for population 2&gt; \
+    --nburn &lt;number of MCMC burn-ins, 5000 by default&gt; \
+    --nsample &lt;number of MCMC samples, 5000 by default&gt; \
+    --lambda &lt;shrinkage parameter&gt; \
+    --sigmasq1 &lt;sample size times heritability in population 1&gt; \
+    --sigmasq2 &lt;sample size times heritability in population 1&gt; \
+    --totnsnp &lt;total number of SNPs across all chromosomes&gt; \
+    --max_iter &lt;number of independent MCMC chains&gt; \
+    --out &lt;output file name&gt;_chr&lt;chromosome #&gt;
+</code></pre></div>
+
+
+<p>Here are the meaning of the flags:</p>
+<ul>
+<li>
+<p><code>--mode</code> tells PESCA whether to estimate genome-wide prior or per-SNP
+posterior probabilities. There are two options for this flag <code>fit</code> and <code>post</code>.
+<code>post</code> tells PESCA to estimate posteriors. For estimating priors see 
+<a href="https://huwenboshi.github.io/pesca/priors/">here</a>.</p>
+</li>
+<li>
+<p><code>f00</code>, <code>f01</code>, <code>f10</code>, <code>f11</code> are multivariate Bernoulli (MVB) model parameters.
+This estimates should be obtained from step 0.</p>
+</li>
+<li>
+<p><code>--zscore1</code> specifies a text file containing a list of paths to GWAS
+summary statistics for population 1, one path per line. Typically, there
+should be one such text file for each chromosome. And each line in the text
+file corresponds to GWAS summary statistics of one region on that chromosome.
+See <a href="https://huwenboshi.github.io/pesca/input_format/#gwas-summary-statistics-data">here</a>
+for format of GWAS summary statistics data for PESCA.</p>
+</li>
+<li>
+<p><code>--zscore2</code> specifies a text file containing a list of paths to GWAS
+summary statistics for population 2, one path per line. Typically, there
+should be one such text file for each chromosome. And each line in the text
+file corresponds to GWAS summary statistics of one region on that chromosome.
+See <a href="https://huwenboshi.github.io/pesca/input_format/#gwas-summary-statistics-data">here</a>
+for format of GWAS summary statistics data for PESCA.</p>
+</li>
+<li>
+<p><code>--ld1</code> specifies a text file containing a list of paths to LD matrices
+for population 1, one path per line. Typically, there should be one such
+text file for each chromosome. And each line in the text file corresponds
+to LD matrix of one region on that chromosome. Additionally, each line
+in the text file should correspond to the same region listed by the
+<code>--zscore1</code> flag.</p>
+</li>
+<li>
+<p><code>--ld2</code> specifies a text file containing a list of paths to LD matrices
+for population 2, one path per line. Typically, there should be one such
+text file for each chromosome. And each line in the text file corresponds
+to LD matrix of one region on that chromosome. Additionally, each line
+in the text file should correspond to the same region listed by the
+<code>--zscore2</code> flag.</p>
+</li>
+<li>
+<p><code>--nburn</code> specifies the number of burn-ins for the MCMC. The default is 5000.</p>
+</li>
+<li>
+<p><code>--nsample</code> specifies the number of samples for the MCMC. The default is 5000.</p>
+</li>
+<li>
+<p><code>--sigmasq1</code> specifies genome-wide SNP-heritability (e.g. estimated by
+LDSC) for population 1 multiplied by sample size of the GWAS in population 1.</p>
+</li>
+<li>
+<p><code>--sigmasq2</code> specifies genome-wide SNP-heritability (e.g. estimated by
+LDSC) for population 2 multiplied by sample size of the GWAS in population 2.</p>
+</li>
+<li>
+<p><code>--totnsnp</code> specifies total number of SNPs across all chromosomes.</p>
+</li>
+</ul>
+<div style="background-color:rgba(230, 230, 250, 1.0);">
+( <b>Note</b>: This is the number of SNPs after intersecting with the
+reference panels, which have been MAF filtered and LD pruned. )
+</div>
+
+<ul>
+<li>
+<p><code>--max_iter</code> specifies the number of independent MCMC chains to estimate
+posteriors. PESCA uses the average posteriors as the final posteriors. We
+recommend setting this value to 20.</p>
+</li>
+<li>
+<p><code>--out</code> specifies the output file name.</p>
+</li>
+</ul>
+<p>The following is an example output, <code>&lt;output file name&gt;_chr&lt;chromosome #&gt;.txt</code>.</p>
+<div class="codehilite"><pre><span></span><code>SNP          BP          A0_GWAS1   A1_GWAS1    Z_GWAS1     A0_GWAS2  A1_GWAS2   Z_GWAS2     P_GWAS1_ONLY    P_GWAS2_ONLY    P_BOTH
+rs12567000   101242593   C          T           -0.669797   C         T          -1.20845    0.00013         0               0.0736
+rs12404364   101255697   T          C           1.40208     T         C          1.45765     0               0.00016         0.10239
+rs12043207   101302813   A          G           -0.720678   A         G          0.356864    0               0               0.05533
+rs7541397    101322866   G          A           -2.03966    G         A          -3.05884    0.01002         0.00356         0.4613
+rs3737581    101341083   G          A           -0.879881   G         A          0.411767    0.0005          0               0.08021
+...          ...         ...        ...         ...         ...       ...        ...         ...             ...             ...
+</code></pre></div>
+
+
+<ul>
+<li>
+<p><code>SNP</code> is the ID of the SNP.</p>
+</li>
+<li>
+<p><code>BP</code> is the base pair position of the SNP.</p>
+</li>
+<li>
+<p><code>A0_GWAS1</code> is the non-effect allele of GWAS in population 1.</p>
+</li>
+<li>
+<p><code>A1_GWAS1</code> is the effect allele of GWAS in population 1.</p>
+</li>
+<li>
+<p><code>Z_GWAS1</code> is the Z-score of GWAS in population 1.</p>
+</li>
+<li>
+<p><code>A0_GWAS2</code> is the non-effect allele of GWAS in population 2.</p>
+</li>
+<li>
+<p><code>A1_GWAS2</code> is the effect allele of GWAS in population 2.</p>
+</li>
+<li>
+<p><code>Z_GWAS2</code> is the Z-score of GWAS in population 2.</p>
+</li>
+<li>
+<p><code>P_GWAS1_ONLY</code> is the posterior probability that the SNP is causal only in
+population 1.</p>
+</li>
+<li>
+<p><code>P_GWAS2_ONLY</code> is the posterior probability that the SNP is causal only in
+population 2.</p>
+</li>
+<li>
+<p><code>P_BOTH</code> is the posterior probability that the SNP is causal in both
+populations.</p>
+</li>
+</ul></div>
         </div>
 
         <footer class="col-md-12">

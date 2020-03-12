@@ -16,7 +16,7 @@ PESCA estimates per-SNP posterior probabilities of each SNP beling
 population-specific and shared via the following command. This step could be
 run for each chromosome in parallel.
 
-```
+```text
 <directory to pesca>/pesca \
     --mode post \
     --f00 <MVB f00 parameter from step 0> \

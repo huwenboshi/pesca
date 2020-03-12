@@ -210,8 +210,8 @@ chromosome in parallel.</p>
     <span class="o">--</span><span class="nv">nburn</span> <span class="o">&lt;</span><span class="nv">number</span> <span class="nv">of</span> <span class="nv">MCMC</span> <span class="nv">burn</span><span class="o">-</span><span class="nv">ins</span>, <span class="mi">5000</span> <span class="nv">by</span> <span class="nv">default</span><span class="o">&gt;</span> \
     <span class="o">--</span><span class="nv">nsample</span> <span class="o">&lt;</span><span class="nv">number</span> <span class="nv">of</span> <span class="nv">MCMC</span> <span class="nv">samples</span>, <span class="mi">5000</span> <span class="nv">by</span> <span class="nv">default</span><span class="o">&gt;</span> \
     <span class="o">--</span><span class="nv">lambda</span> <span class="o">&lt;</span><span class="nv">shrinkage</span> <span class="nv">parameter</span><span class="o">&gt;</span> \
-    <span class="o">--</span><span class="nv">sigmasq1</span> $<span class="nv">sigmasq1</span> \
-    <span class="o">--</span><span class="nv">sigmasq2</span>  $<span class="nv">sigmasq2</span> \
+    <span class="o">--</span><span class="nv">sigmasq1</span> <span class="o">&lt;</span><span class="nv">sample</span> <span class="nv">size</span> <span class="nv">times</span> <span class="nv">heritability</span> <span class="nv">in</span> <span class="nv">population</span> <span class="mi">1</span><span class="o">&gt;</span> \
+    <span class="o">--</span><span class="nv">sigmasq2</span> <span class="o">&lt;</span><span class="nv">sample</span> <span class="nv">size</span> <span class="nv">times</span> <span class="nv">heritability</span> <span class="nv">in</span> <span class="nv">population</span> <span class="mi">1</span><span class="o">&gt;</span> \
     <span class="o">--</span><span class="nv">totnsnp</span> <span class="o">&lt;</span><span class="nv">total</span> <span class="nv">number</span> <span class="nv">of</span> <span class="nv">SNPs</span> <span class="nv">across</span> <span class="nv">all</span> <span class="nv">chromosomes</span><span class="o">&gt;</span> \
     <span class="o">--</span><span class="nv">max_iter</span> <span class="o">&lt;</span><span class="nv">maximum</span> <span class="nv">number</span> <span class="nv">of</span> <span class="nv">EM</span> <span class="nv">iterations</span><span class="o">&gt;</span> \
     <span class="o">--</span><span class="nv">out</span> <span class="o">&lt;</span><span class="nv">output</span> <span class="nv">file</span> <span class="nv">name</span><span class="o">&gt;</span><span class="nv">_chr</span><span class="o">&lt;</span><span class="nv">chromosome</span> #<span class="o">&gt;</span>
@@ -221,9 +221,9 @@ chromosome in parallel.</p>
 <p>Here are the meaning of the flags:</p>
 <ul>
 <li>
-<p><code>--model</code> tells PESCA whether to estimate genome-wide prior or per-SNP
+<p><code>--mode</code> tells PESCA whether to estimate genome-wide prior or per-SNP
 posterior probabilities. There are two options for this flag <code>fit</code> and <code>post</code>.
-For estimating per-SNP posterior see
+<code>fit</code> tells PESCA to estimate priors. For estimating per-SNP posterior see
 <a href="https://huwenboshi.github.io/pesca/posterior/">here</a>.</p>
 </li>
 <li>
@@ -264,13 +264,6 @@ in the text file should correspond to the same region listed by the
 <li>
 <p><code>--nsample</code> specifies the number of samples for the MCMC. The default is 5000.</p>
 </li>
-</ul>
-<div style="background-color:rgba(230, 230, 250, 1.0);">
-( <b>Note</b>: This is the number of SNPs after intersecting with the
-reference panels, which have been MAF filtered and LD pruned. )
-</div>
-
-<ul>
 <li>
 <p><code>--sigmasq1</code> specifies genome-wide SNP-heritability (e.g. estimated by
 LDSC) for population 1 multiplied by sample size of the GWAS in population 1.</p>
@@ -282,6 +275,13 @@ LDSC) for population 2 multiplied by sample size of the GWAS in population 2.</p
 <li>
 <p><code>--totnsnp</code> specifies total number of SNPs across all chromosomes.</p>
 </li>
+</ul>
+<div style="background-color:rgba(230, 230, 250, 1.0);">
+( <b>Note</b>: This is the number of SNPs after intersecting with the
+reference panels, which have been MAF filtered and LD pruned. )
+</div>
+
+<ul>
 <li>
 <p><code>--max_iter</code> specifies maximum number of EM iterations. The default is 200.</p>
 </li>
