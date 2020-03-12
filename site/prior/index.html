@@ -117,14 +117,14 @@
 probabilities of a SNP to be causal in one population (i.e.
 population-specific) or in both populations (i.e. shared).</p>
 <h3 id="recommended-pipeline">Recommended pipeline</h3>
-<h4 id="step-1-estimate-genome-wide-heritability-of-the-trait">Step 1: estimate genome-wide heritability of the trait</h4>
+<h4 id="step-0-estimate-genome-wide-heritability-of-the-trait">Step 0: estimate genome-wide heritability of the trait</h4>
 <p>This step can be performend using <a href="https://github.com/bulik/ldsc/wiki/Heritability-and-Genetic-Correlation">LDSC</a>.</p>
 <div style="background-color:rgba(230, 230, 250, 1.0);">
 ( <b>Note</b>: This step should be performed using all SNPs without any
 MAF filtering or LD pruning, except for those required by LDSC. )
 </div>
 
-<h4 id="step-2-extract-summary-statistics-and-ld-of-each-region-for-each-chromosome">Step 2: extract summary statistics and LD of each region for each chromosome</h4>
+<h4 id="step-1-extract-summary-statistics-and-ld-of-each-region-for-each-chromosome">Step 1: extract summary statistics and LD of each region for each chromosome</h4>
 <p>In this step, one</p>
 <ul>
 <li>
@@ -197,7 +197,7 @@ population 1. <code>chr1_ld_list_pop2.txt</code> is a list of paths to all the
 <code>chr1_region*_ld_pop2.txt</code> files.</p>
 </li>
 </ul>
-<h4 id="step-3-run-pesca-for-each-chromosome">Step 3: run PESCA for each chromosome</h4>
+<h4 id="step-2-run-pesca-for-each-chromosome">Step 2: run PESCA for each chromosome</h4>
 <p>PESCA estimates genome-wide proportions of population-specific and shared
 causal variants via the following command. This step could be run for each
 chromosome in parallel.</p>
@@ -214,7 +214,7 @@ chromosome in parallel.</p>
     <span class="o">--</span><span class="nv">sigmasq2</span>  $<span class="nv">sigmasq2</span> \
     <span class="o">--</span><span class="nv">totnsnp</span> <span class="o">&lt;</span><span class="nv">total</span> <span class="nv">number</span> <span class="nv">of</span> <span class="nv">SNPs</span> <span class="nv">across</span> <span class="nv">all</span> <span class="nv">chromosomes</span><span class="o">&gt;</span> \
     <span class="o">--</span><span class="nv">max_iter</span> <span class="o">&lt;</span><span class="nv">maximum</span> <span class="nv">number</span> <span class="nv">of</span> <span class="nv">EM</span> <span class="nv">iterations</span><span class="o">&gt;</span> \
-    <span class="o">--</span><span class="nv">out</span> <span class="o">&lt;</span><span class="nv">output</span> <span class="nv">file</span> <span class="nv">name</span><span class="o">&gt;</span>
+    <span class="o">--</span><span class="nv">out</span> <span class="o">&lt;</span><span class="nv">output</span> <span class="nv">file</span> <span class="nv">name</span><span class="o">&gt;</span><span class="nv">_chr</span><span class="o">&lt;</span><span class="nv">chromosome</span> #<span class="o">&gt;</span>
 </code></pre></div>
 
 
@@ -289,7 +289,7 @@ LDSC) for population 2 multiplied by sample size of the GWAS in population 2.</p
 <p><code>--out</code> specifies the output file name.</p>
 </li>
 </ul>
-<p>The following is an example output, <code>&lt;output file name&gt;.log</code>.</p>
+<p>The following is an example output, <code>&lt;output file name&gt;_chr&lt;chromosome #&gt;.log</code>.</p>
 <div class="codehilite"><pre><span></span><code>iter    nsnp    q00     q01     q10     q11      f00     f01       f10       f11
 0       9960    9389.8  190.067 190.067 190.067  0       -3.9      -3.9      3.9
 1       9960    9433.58 177.374 184.488 164.561  0       -3.97377  -3.93445  3.85947
@@ -322,10 +322,40 @@ LDSC) for population 2 multiplied by sample size of the GWAS in population 2.</p
 </li>
 <li>
 <p><code>f00</code>, <code>f01</code>, and <code>f10</code>, and <code>f11</code> are parameters of the multivariate Bernoulli
-(MVB) model. They will be used in the
-<a href="https://huwenboshi.github.io/pesca/posterior/">estimation of posterior probabilities</a>.</p>
+(MVB) model.</p>
 </li>
-</ul></div>
+</ul>
+<p>We use results from the last EM iteration as the final estimates.</p>
+<h4 id="step-3-aggregate-results-from-all-chromosomes">Step 3: aggregate results from all chromosomes</h4>
+<p>After step 2, there should be one <code>&lt;output file name&gt;_chr&lt;chromosome #&gt;.log</code>
+for each chromosome. To aggregate results from step 2 across chromosomes, we
+provide <a href="https://github.com/huwenboshi/pesca/blob/master/misc/parse_prior.py">parse_prior.py</a>.
+This script uses the average of the last 50 iterations of the log file to
+estimate genome-wide number of null SNPs (not causal in both populations),
+population 1 specific causal SNPs, population 2 specific causal SNPs, and 
+shared causal SNPs. The script can be run as follows.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">python3</span> <span class="o">&lt;</span><span class="n">path</span> <span class="k">to</span> <span class="n">script</span><span class="o">&gt;/</span><span class="n">parse_prior</span><span class="p">.</span><span class="n">py</span> <span class="err">\</span>
+    <span class="c1">--prefix &lt;path to results from step 2&gt;/&lt;output file name&gt;_chr</span>
+</code></pre></div>
+
+
+<p>The following is an example output.</p>
+<div class="codehilite"><pre><span></span><code>number of SNPs
+q00 235640.05
+q01 275.53
+q10 376.20
+q11 21838.23
+
+MVB parameters
+f00 0.0000
+f01 -6.7514
+f10 -6.4399
+f11 10.8127
+</code></pre></div>
+
+
+<p>The MVB parameters will be used for estimating the
+<a href="https://huwenboshi.github.io/pesca/posterior/">posterior probabilities</a>.</p></div>
         </div>
 
         <footer class="col-md-12">

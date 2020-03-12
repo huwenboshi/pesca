@@ -96,8 +96,8 @@ chromosome in parallel.
     --nburn <number of MCMC burn-ins, 5000 by default> \
     --nsample <number of MCMC samples, 5000 by default> \
     --lambda <shrinkage parameter> \
-    --sigmasq1 $sigmasq1 \
-    --sigmasq2  $sigmasq2 \
+    --sigmasq1 <sample size times heritability in population 1> \
+    --sigmasq2 <sample size times heritability in population 1> \
     --totnsnp <total number of SNPs across all chromosomes> \
     --max_iter <maximum number of EM iterations> \
     --out <output file name>_chr<chromosome #>
@@ -105,9 +105,9 @@ chromosome in parallel.
 
 Here are the meaning of the flags:
 
-* `--model` tells PESCA whether to estimate genome-wide prior or per-SNP
+* `--mode` tells PESCA whether to estimate genome-wide prior or per-SNP
 posterior probabilities. There are two options for this flag `fit` and `post`.
-For estimating per-SNP posterior see
+`fit` tells PESCA to estimate priors. For estimating per-SNP posterior see
 [here](https://huwenboshi.github.io/pesca/posterior/).
 
 * `--zscore1` specifies a text file containing a list of paths to GWAS
@@ -142,11 +142,6 @@ in the text file should correspond to the same region listed by the
 
 * `--nsample` specifies the number of samples for the MCMC. The default is 5000.
 
-<div style="background-color:rgba(230, 230, 250, 1.0);">
-( <b>Note</b>: This is the number of SNPs after intersecting with the
-reference panels, which have been MAF filtered and LD pruned. )
-</div>
-
 * `--sigmasq1` specifies genome-wide SNP-heritability (e.g. estimated by
 LDSC) for population 1 multiplied by sample size of the GWAS in population 1.
 
@@ -154,6 +149,11 @@ LDSC) for population 1 multiplied by sample size of the GWAS in population 1.
 LDSC) for population 2 multiplied by sample size of the GWAS in population 2.
 
 * `--totnsnp` specifies total number of SNPs across all chromosomes.
+
+<div style="background-color:rgba(230, 230, 250, 1.0);">
+( <b>Note</b>: This is the number of SNPs after intersecting with the
+reference panels, which have been MAF filtered and LD pruned. )
+</div>
 
 * `--max_iter` specifies maximum number of EM iterations. The default is 200.
 
