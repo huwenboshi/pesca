@@ -107,7 +107,10 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
         <li class="main active"><a href="#estimating-genome-wide-proportion-of-population-specific-and-shared-causal-variants">Estimating genome-wide proportion of population-specific and shared causal variants</a></li>
-            <li><a href="#recommended-pipeline">Recommended pipeline</a></li>
+            <li><a href="#step-0-estimate-genome-wide-heritability-of-the-trait">Step 0: estimate genome-wide heritability of the trait</a></li>
+            <li><a href="#step-1-extract-summary-statistics-and-ld-of-each-region-for-each-chromosome">Step 1: extract summary statistics and LD of each region for each chromosome</a></li>
+            <li><a href="#step-2-run-pesca-for-each-chromosome">Step 2: run PESCA for each chromosome</a></li>
+            <li><a href="#step-3-aggregate-results-from-all-chromosomes">Step 3: aggregate results from all chromosomes</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
@@ -116,15 +119,14 @@
 <p>This page describes the pipeline to estimate the genome-wide prior
 probabilities of a SNP to be causal in one population (i.e.
 population-specific) or in both populations (i.e. shared).</p>
-<h2 id="recommended-pipeline">Recommended pipeline</h2>
-<h3 id="step-0-estimate-genome-wide-heritability-of-the-trait">Step 0: estimate genome-wide heritability of the trait</h3>
+<h4 id="step-0-estimate-genome-wide-heritability-of-the-trait">Step 0: estimate genome-wide heritability of the trait</h4>
 <p>This step can be performend using <a href="https://github.com/bulik/ldsc/wiki/Heritability-and-Genetic-Correlation">LDSC</a>.</p>
 <div style="background-color:rgba(230, 230, 250, 1.0);">
 ( <b>Note</b>: This step should be performed using all SNPs without any
 MAF filtering or LD pruning, except for those required by LDSC. )
 </div>
 
-<h3 id="step-1-extract-summary-statistics-and-ld-of-each-region-for-each-chromosome">Step 1: extract summary statistics and LD of each region for each chromosome</h3>
+<h4 id="step-1-extract-summary-statistics-and-ld-of-each-region-for-each-chromosome">Step 1: extract summary statistics and LD of each region for each chromosome</h4>
 <p>In this step, one</p>
 <ul>
 <li>
@@ -197,7 +199,7 @@ population 1. <code>chr1_ld_list_pop2.txt</code> is a list of paths to all the
 <code>chr1_region*_ld_pop2.txt</code> files.</p>
 </li>
 </ul>
-<h3 id="step-2-run-pesca-for-each-chromosome">Step 2: run PESCA for each chromosome</h3>
+<h4 id="step-2-run-pesca-for-each-chromosome">Step 2: run PESCA for each chromosome</h4>
 <p>PESCA estimates genome-wide proportions of population-specific and shared
 causal variants via the following command. This step could be run for each
 chromosome in parallel.</p>
@@ -326,7 +328,7 @@ reference panels, which have been MAF filtered and LD pruned. )
 </li>
 </ul>
 <p>We use results from the last EM iteration as the final estimates.</p>
-<h3 id="step-3-aggregate-results-from-all-chromosomes">Step 3: aggregate results from all chromosomes</h3>
+<h4 id="step-3-aggregate-results-from-all-chromosomes">Step 3: aggregate results from all chromosomes</h4>
 <p>After step 2, there should be one <code>&lt;output file name&gt;_chr&lt;chromosome #&gt;.log</code>
 for each chromosome. To aggregate results from step 2 across chromosomes, we
 provide <a href="https://github.com/huwenboshi/pesca/blob/master/misc/parse_prior.py">parse_prior.py</a>.
