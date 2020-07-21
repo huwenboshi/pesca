@@ -93,7 +93,7 @@ chromosome in parallel.
     --ld2 <list of LD files for population 2> \
     --nburn <number of MCMC burn-ins, 5000 by default> \
     --nsample <number of MCMC samples, 5000 by default> \
-    --lambda <shrinkage parameter> \
+    --lambda <shrinkage parameter, 0.0001 by default> \
     --sigmasq1 <sample size times heritability in population 1> \
     --sigmasq2 <sample size times heritability in population 1> \
     --totnsnp <total number of SNPs across all chromosomes> \
