@@ -9,7 +9,7 @@ GWAS summary statistics data should have the following columns, ordered as
 listed below.
 
 * `SNP`: rs ID of the SNP (e.g. rs62442)
-* `BP`: Chromosome number of the SNP. This should be a number between 1 and 22.
+* `BP`: Base pair position of the SNP. 
 * `A2`: Effect allele (i.e. trait increasing allele) of the SNP. The sign of
 Z-score is with respect to this allele.
 * `A1`: The other allele of the SNP.
