@@ -4,9 +4,16 @@
 #include <fstream>
 #include <sstream>
 #include <stdlib.h>
+#include <stdexcept>
 #ifndef EIGEN_USE_BLAS
 #define EIGEN_USE_BLAS
 #endif
+#undef eigen_assert
+#define eigen_assert(x) \
+  if (!(x)) { throw (std::runtime_error("Eigen failed")); }
+#undef eigen_plain_assert
+#define eigen_plain_assert(x) \
+  if (!(x)) { throw (std::runtime_error("Eigen failed")); }
 #include<Eigen/Dense>
 #include <boost/program_options.hpp>
 

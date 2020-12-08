@@ -56,6 +56,7 @@ po::variables_map get_command_line(int ac, char* av[]) {
     try {
         po::notify(vm);
     } catch (exception& e) {
+        cerr << "test" << endl;
         cerr << desc << endl;
         exit(1);
     }

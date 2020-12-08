@@ -3,16 +3,9 @@
 #include <vector>
 #include <unordered_set>
 #include <set>
-#ifndef EIGEN_USE_BLAS
-#define EIGEN_USE_BLAS
-#endif
-#include <Eigen/Dense>
 #include <algorithm>
 
 #include "utils.h"
-
-using namespace Eigen;
-using namespace std;
 
 #ifndef NUMERIC
 #define NUMERIC

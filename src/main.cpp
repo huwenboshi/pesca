@@ -1,6 +1,6 @@
+#include "utils.h"
 #include "mcmc.h"
 #include "numeric.h"
-#include "utils.h"
 #include "fit.h"
 #include "post.h"
 #include <time.h>
@@ -8,7 +8,6 @@
 #include <iostream>
 #include <fstream>
 #include <set>
-#include <Eigen/Dense>
 
 using namespace std;
 using namespace Eigen;

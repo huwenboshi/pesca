@@ -1,11 +1,10 @@
-#include "mcmc.h"
 #include <time.h>
 #include <math.h>
 #include <iostream>
 #include <random>
 #include <cstdlib>
 
-using namespace std;
+#include "mcmc.h"
 
 // generate a random integer between min and max inclusive
 size_t rand_int(size_t min, size_t max) {
@@ -151,27 +150,37 @@ double Chain::log_bf(size_t updt, const config_t& conf) {
         ii++;
     }
 
-    // compute svd
-    BDCSVD<MatrixXf> svd(ld_conf, ComputeFullV);
-    MatrixXf D = svd.singularValues().asDiagonal();
-    MatrixXf V = svd.matrixV();
+    try {
+        // compute svd
+        BDCSVD<MatrixXf> svd(ld_conf, ComputeFullV);
+        MatrixXf D = svd.singularValues().asDiagonal();
+        MatrixXf V = svd.matrixV();
 
-    // find rank of the matrix
-    size_t num_indep = 0.0;
-    for(size_t i=0; i<num_cau; i++)
-        if(D(i,i) > 0.0) num_indep++; else break;
+        // find rank of the matrix
+        size_t num_indep = 0;
+        for(size_t i=0; i<num_cau; i++)
+            if(D(i,i) > 0.0) num_indep++; else break;
 
-    // compute log Bayes factor
-    double sigma_sq = m_sigma_sq[updt]/((double) num_indep);
-    double bf = 0.0;
-    for(size_t i=0; i<num_indep; i++) {
-        bf -= log(1.0 + sigma_sq*D(i,i));
-        double prod = zsc_conf.transpose()*V.col(i);
-        bf += sigma_sq/(1.0+sigma_sq*D(i,i))*(prod*prod);
+        // compute log Bayes factor
+        double sigma_sq = m_sigma_sq[updt]/((double) num_indep);
+        double bf = 0.0;
+        for(size_t i=0; i<num_indep; i++) {
+            bf -= log(1.0 + sigma_sq*D(i,i));
+            double prod = zsc_conf.transpose()*V.col(i);
+            bf += sigma_sq/(1.0+sigma_sq*D(i,i))*(prod*prod);
+        }
+        
+        bf *= 0.5;
+        return bf;
     }
-    bf *= 0.5;
-
-    return bf;
+    catch(const runtime_error& e) {
+        cerr << "Eigen SVD failed" << endl;
+        return -1e8;
+    }
+    catch(...) {
+        cerr << "Eigen SVD failed" << endl;
+        return -1e8;
+    }
 }
 
 // evaluate the loglikelihood of the configuration

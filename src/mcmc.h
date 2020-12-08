@@ -1,12 +1,11 @@
 #include <set>
 #include <string>
-#include "utils.h"
-#include "numeric.h"
 #include <stdlib.h>
 #include <numeric>
 #include <algorithm>
 
-using namespace std;
+#include "utils.h"
+#include "numeric.h"
 
 #ifndef MCMC
 #define MCMC
