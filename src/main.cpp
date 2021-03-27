@@ -15,35 +15,78 @@ using namespace Eigen;
 int main(int ac, char* av[]) {
 
     // set random seed
-    srand(time(NULL)); 
+    srand(62442); 
     
     // parse command line
     po::variables_map vm = get_command_line(ac, av);
-    string zsc_file_nm1 = vm["zscore1"].as<string>();
-    string zsc_file_nm2 = vm["zscore2"].as<string>();
-    string ld1_nm = vm["ld1"].as<string>();
-    string ld2_nm = vm["ld2"].as<string>();
-    string mode = vm["mode"].as<string>();
-    string out = vm["out"].as<string>();
-    double sigmasq1 = vm["sigmasq1"].as<double>();
-    double sigmasq2 = vm["sigmasq2"].as<double>();
-    double tot_nsnp = vm["totnsnp"].as<double>();
+   
+    string zsc_file_nm1, zsc_file_nm2, ld1_nm, ld2_nm, mode, out;
+    double sigmasq1, sigmasq2, tot_nsnp;
+    try {
+        zsc_file_nm1 = vm["zscore1"].as<string>();
+        zsc_file_nm2 = vm["zscore2"].as<string>();
+        ld1_nm = vm["ld1"].as<string>();
+        ld2_nm = vm["ld2"].as<string>();
+        mode = vm["mode"].as<string>();
+        out = vm["out"].as<string>();
+        sigmasq1 = vm["sigmasq1"].as<double>();
+        sigmasq2 = vm["sigmasq2"].as<double>();
+        tot_nsnp = vm["totnsnp"].as<double>();
+    }
+    catch(...) {
+        cerr <<"The following flags must be specified:" << endl
+             <<"\t--mode\t\t(\"fit\" or \"post\")" << endl
+             <<"\t--zscore1\t(a list of z-score files for pop 1)" << endl
+             <<"\t--zscore2\t(a list of z-score files for pop 2)" << endl
+             <<"\t--ld1\t\t(a list of LD files for pop 1)" << endl
+             <<"\t--ld2\t\t(a list of LD files for pop 2)" << endl
+             <<"\t--sigmasq1\t(heritability times sample size for pop 1)"<<endl
+             <<"\t--sigmasq2\t(heritability times sample size for pop 2)"<<endl
+             <<"\t--totnsnp\t(total number of SNPs)" << endl
+             <<"\t--out\t\t(output file name)" << endl;
+        cerr <<"The following flags are optional:" << endl
+             <<"\t--nchain\t(number of MCMC chains, default is 1)" << endl
+             <<"\t--templ\t\t(lower bound of simulated"
+             <<" annealing temperature, default is 1.0)" << endl
+             <<"\t--temph\t\t(higher bound of simulated"
+             <<" annealing temperature, default is 1.0)" << endl
+             <<"\t--nburn\t\t(number of MCMC burn-ins, default is 30000)"<<endl
+             <<"\t--nsample\t(number of MCMC samples, default is 50000)"<<endl
+             <<"\t--f00\t\t(f00 parameter of the MVB, default is 0.0)"<<endl
+             <<"\t--f01\t\t(f01 parameter of the MVB, default is -3.9)"<<endl
+             <<"\t--f10\t\t(f10 parameter of the MVB, default is -3.9)"<<endl
+             <<"\t--f11\t\t(f11 parameter of the MVB, default is 3.9)"<<endl
+             <<"\t--lambda\t(LD shrinkage parameter, default is 0.0001)"<<endl
+             <<"\t--max_iter_fit\t(max number of EM iterations for prior"
+             <<" estimation, default is 100)"<<endl
+             <<"\t--max_iter_post\t(number of iterations for posterior"
+             <<" estimation, default is 1)"<<endl
+            <<"\t--print\t\t(\"yes\" or \"no\", default is \"yes\")" << endl;
+        return 1;
+    }
+    
     double templ = vm["templ"].as<double>();
     double temph = vm["temph"].as<double>();
     size_t nchain = vm["nchain"].as<size_t>();
     size_t nburn = vm["nburn"].as<size_t>();
     size_t nsample = vm["nsample"].as<size_t>();
-    size_t max_iter = vm["max_iter"].as<size_t>();
+    size_t max_iter_fit = vm["max_iter_fit"].as<size_t>();
+    size_t max_iter_post = vm["max_iter_post"].as<size_t>();
     double f00 = vm["f00"].as<double>();
     double f01 = vm["f01"].as<double>();
     double f10 = vm["f10"].as<double>();
     double f11 = vm["f11"].as<double>();
     double lambda = vm["lambda"].as<double>();
+    string print = vm["print"].as<string>();
 
     // create files to write
     ofstream outfile, logfile;
-    outfile.open(out+".txt");
-    logfile.open(out+".log");
+    if(mode == "fit") {
+        logfile.open(out+".log");
+    }
+    if(mode == "post") {
+        outfile.open(out+".txt");
+    }
 
     // load list
     vector<string> zscore1_list = load_list(zsc_file_nm1.c_str());
@@ -111,7 +154,8 @@ int main(int ac, char* av[]) {
 
         // estimate the parameters
         fit(all_zsc, all_sigma_sq, all_ld_mat, all_nsnp, params, templ,
-            temph, nchain, nburn, nsample, lambda, max_iter, outfile, logfile);
+            temph, nchain, nburn, nsample, lambda, max_iter_fit,
+            outfile, logfile, print);
     }
 
     // perform posterior inference
@@ -126,11 +170,15 @@ int main(int ac, char* av[]) {
 
         // estimate the parameters
         post(all_zsc, all_sigma_sq, all_ld_mat, all_nsnp, params, templ,
-            temph, nchain, nburn, nsample, lambda, max_iter, all_zsc_inf1,
+            temph, nchain, nburn, nsample, lambda, max_iter_post, all_zsc_inf1,
             all_zsc_inf2, outfile, logfile);
     }
 
     // close files
-    outfile.close();
-    logfile.close();
+    if(mode == "post") {
+        outfile.close();
+    }
+    if(mode == "fit") {
+        logfile.close();
+    }
 }

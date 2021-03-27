@@ -24,6 +24,7 @@ void fit(const vector<vector<VectorXf> >& all_zsc,
          const vector<size_t>& all_nsnp, VectorXf& params,
          double templ, double temph, size_t nchain,
          size_t nburn, size_t nsample, double lambda,
-         size_t max_iter, ofstream& outfile, ofstream& logfile);
+         size_t max_iter, ofstream& outfile, ofstream& logfile,
+         string print);
 
 #endif

@@ -23,7 +23,6 @@ po::variables_map get_command_line(int ac, char* av[]) {
     po::options_description desc("Allowed options");
     
     desc.add_options()
-        ("help", "produce help message")
         ("zscore1", po::value<string>(), "summary stats file 1")
         ("zscore2", po::value<string>(), "summary stats file 2")
         ("ld1", po::value<string>(), "ld 1")
@@ -47,7 +46,11 @@ po::variables_map get_command_line(int ac, char* av[]) {
         ("f10", po::value<double>()->default_value(-3.9), "f10")
         ("f11", po::value<double>()->default_value(3.9), "f11")
         ("lambda", po::value<double>()->default_value(0.0001), "lambda")
-        ("max_iter", po::value<size_t>()->default_value(100), "max_iter")
+        ("max_iter_fit", po::value<size_t>()->default_value(100),
+            "max_iter_fit")
+        ("max_iter_post", po::value<size_t>()->default_value(1),
+            "max_iter_post")
+        ("print", po::value<string>()->default_value("yes"), "print")
         ("out", po::value<string>(), "out")
     ;
 

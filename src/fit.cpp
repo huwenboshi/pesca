@@ -12,7 +12,8 @@ void fit(const vector<vector<VectorXf> >& all_zsc,
          const vector<size_t>& all_nsnp, VectorXf& params,
          double templ, double temph, size_t nchain,
          size_t nburn, size_t nsample, double lambda,
-         size_t max_iter, ofstream& outfile, ofstream& logfile) {
+         size_t max_iter, ofstream& outfile, ofstream& logfile,
+         string print) {
 
     // count total number of SNPs in the loci
     double nsnp_tot = 0.0;
@@ -25,16 +26,37 @@ void fit(const vector<vector<VectorXf> >& all_zsc,
     logfile << "iter\tnsnp\tq00\tq01\tq10\tq11\tf00\tf01\tf10\tf11" << endl;
     double denom = log_mvb_denom(params);
     logfile << "0" << "\t" << nsnp_tot << "\t";
+    if(print == "yes") {
+        cerr << "iter\tnsnp\tq00\tq01\tq10\tq11\tf00\tf01\tf10\tf11" << endl;
+        cerr << "0" << "\t" << nsnp_tot << "\t";
+    }
+    
     for(size_t i=0; i < params.rows(); i++) {
         logfile << nsnp_tot*exp(mvb_sfunc(params, i)-denom) << "\t";
+        if(print == "yes") {
+            cerr << nsnp_tot*exp(mvb_sfunc(params, i)-denom) << "\t";
+        }
     }
     logfile << "\t";
+    if(print == "yes") {
+        cerr << "\t";
+    }
     for(size_t i=0; i < params.rows(); i++) {
         logfile << params(i);
-        if(i < params.rows() - 1)
+        if(print == "yes") {
+            cerr << params(i);
+        }
+        if(i < params.rows() - 1) {
             logfile << "\t";
+            if(print == "yes") {
+                cerr << "\t";
+            }
+        }
     }
     logfile << endl;
+    if(print == "yes") {
+        cerr << endl;
+    }
 
     // create one sampler for each locus
     double tstep = (temph-templ)/(((double)nchain)-1+eps);
@@ -93,16 +115,35 @@ void fit(const vector<vector<VectorXf> >& all_zsc,
         // log the output of each iteration
         double denom = log_mvb_denom(params);
         logfile << iter+1 << "\t" << nsnp_tot << "\t";
+        if(print == "yes") {
+            cerr << iter+1 << "\t" << nsnp_tot << "\t";
+        }
         for(size_t i=0; i < params.rows(); i++) {
             logfile << nsnp_tot*exp(mvb_sfunc(params, i)-denom) << "\t";
+            if(print == "yes") {
+                cerr << nsnp_tot*exp(mvb_sfunc(params, i)-denom) << "\t";
+            }
         }
         logfile << "\t";
+        if(print == "yes") {
+            cerr << "\t";
+        }
         for(size_t i=0; i < params.rows(); i++) {
             logfile << params(i);
-            if(i < params.rows() - 1)
+            if(print == "yes") {
+                cerr << params(i);
+            }
+            if(i < params.rows() - 1) {
                 logfile << "\t";
+                if(print == "yes") {
+                    cerr << "\t";
+                }
+            }
         }
         logfile << endl;
+        if(print == "yes") {
+            cerr << endl;
+        }
     }
 }
 
