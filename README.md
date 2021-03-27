@@ -13,7 +13,7 @@ for details.
 
 ### Releases
 
-* [version 0.3-beta](https://github.com/huwenboshi/pesca/archive/v0.3-beta.tar.gz)
+* [version 0.3-beta](https://github.com/huwenboshi/pesca/archive/version0.3-beta.tar.gz)
 
 * [version 0.2-beta](https://github.com/huwenboshi/pesca/archive/v0.2-beta.tar.gz)
 
