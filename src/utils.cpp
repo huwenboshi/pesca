@@ -37,14 +37,19 @@ po::variables_map get_command_line(int ac, char* av[]) {
             "higher temperature for mcmc")
         ("nchain", po::value<size_t>()->default_value(1),
             "number of markov chains")
-        ("nburn", po::value<size_t>()->default_value(30000),
+        ("nburn", po::value<size_t>()->default_value(20000),
             "number of burn in")
-        ("nsample", po::value<size_t>()->default_value(50000),
+        ("nsample", po::value<size_t>()->default_value(30000),
             "number of samples")
+        ("dist", po::value<string>()->default_value("mult"), "dist")
         ("f00", po::value<double>()->default_value(0.0), "f00")
-        ("f01", po::value<double>()->default_value(-3.9), "f01")
-        ("f10", po::value<double>()->default_value(-3.9), "f10")
-        ("f11", po::value<double>()->default_value(3.9), "f11")
+        ("f01", po::value<double>()->default_value(-6.89), "f01")
+        ("f10", po::value<double>()->default_value(-6.89), "f10")
+        ("f11", po::value<double>()->default_value(8.98), "f11")
+        ("p00", po::value<double>()->default_value(0.99), "p00")
+        ("p01", po::value<double>()->default_value(0.001), "p01")
+        ("p10", po::value<double>()->default_value(0.001), "p10")
+        ("p11", po::value<double>()->default_value(0.008), "p11")
         ("lambda", po::value<double>()->default_value(0.0001), "lambda")
         ("max_iter_fit", po::value<size_t>()->default_value(100),
             "max_iter_fit")

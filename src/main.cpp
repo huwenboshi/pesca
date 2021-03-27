@@ -50,13 +50,18 @@ int main(int ac, char* av[]) {
              <<" annealing temperature, default is 1.0)" << endl
              <<"\t--temph\t\t(higher bound of simulated"
              <<" annealing temperature, default is 1.0)" << endl
-             <<"\t--nburn\t\t(number of MCMC burn-ins, default is 30000)"<<endl
-             <<"\t--nsample\t(number of MCMC samples, default is 50000)"<<endl
+             <<"\t--nburn\t\t(number of MCMC burn-ins, default is 20000)"<<endl
+             <<"\t--nsample\t(number of MCMC samples, default is 30000)"<<endl
+             <<"\t--dist\t\t(\"mvb\" or \"mult\", default is \"mult\")"<<endl
              <<"\t--f00\t\t(f00 parameter of the MVB, default is 0.0)"<<endl
-             <<"\t--f01\t\t(f01 parameter of the MVB, default is -3.9)"<<endl
-             <<"\t--f10\t\t(f10 parameter of the MVB, default is -3.9)"<<endl
-             <<"\t--f11\t\t(f11 parameter of the MVB, default is 3.9)"<<endl
-             <<"\t--lambda\t(LD shrinkage parameter, default is 0.0001)"<<endl
+             <<"\t--f01\t\t(f01 parameter of the MVB, default is -6.89)"<<endl
+             <<"\t--f10\t\t(f10 parameter of the MVB, default is -6.89)"<<endl
+             <<"\t--f11\t\t(f11 parameter of the MVB, default is 8.98)"<<endl
+             <<"\t--p00\t\t(p00 parameter of the Mult, default is 0.99)"<<endl
+             <<"\t--p01\t\t(p01 parameter of the Mult, default is 0.001)"<<endl
+             <<"\t--p10\t\t(p10 parameter of the Mult, default is 0.001)"<<endl
+             <<"\t--p11\t\t(p11 parameter of the Mult, default is 0.008)"<<endl
+             <<"\t--lambda\t(shrinkage parameter, default is 0.0001)"<<endl
              <<"\t--max_iter_fit\t(max number of EM iterations for prior"
              <<" estimation, default is 100)"<<endl
              <<"\t--max_iter_post\t(number of iterations for posterior"
@@ -76,8 +81,13 @@ int main(int ac, char* av[]) {
     double f01 = vm["f01"].as<double>();
     double f10 = vm["f10"].as<double>();
     double f11 = vm["f11"].as<double>();
+    double p00 = vm["p00"].as<double>();
+    double p01 = vm["p01"].as<double>();
+    double p10 = vm["p10"].as<double>();
+    double p11 = vm["p11"].as<double>();
     double lambda = vm["lambda"].as<double>();
     string print = vm["print"].as<string>();
+    string dist = vm["dist"].as<string>();
 
     // create files to write
     ofstream outfile, logfile;
@@ -142,17 +152,31 @@ int main(int ac, char* av[]) {
         all_sigma_sq[i].push_back(sigmasq2_locus);
     }
 
-    // perform fitting
-    if(mode == "fit" && !all_nsnp.empty()) {
-        
-        // initialize parameter
-        VectorXf params = VectorXf::Zero(4);
+    // initialize parameter
+    VectorXf params = VectorXf::Zero(4);
+    if(dist == "mvb") {
         params(0) = f00;
         params(1) = f01;
         params(2) = f10;
         params(3) = f11;
+    }
+    else if(dist == "mult") {
+        if(p01 <= 0.0 || p01 <= 0.0 || p10 <= 0.0 || p11 <= 0.0) {
+            cerr << "Parameters cannot be negative for Mult" << endl;
+            return 1;
+        }
+        params(0) = 0.0;
+        params(1) = log(p01/p00);
+        params(2) = log(p10/p00);
+        params(3) = log(p11/p00) - params(2) - params(1);
+    }
+    else {
+        cerr << "Unrecognized distribution" << endl;
+        return 1;
+    }
 
-        // estimate the parameters
+    // perform fitting
+    if(mode == "fit" && !all_nsnp.empty()) {
         fit(all_zsc, all_sigma_sq, all_ld_mat, all_nsnp, params, templ,
             temph, nchain, nburn, nsample, lambda, max_iter_fit,
             outfile, logfile, print);
@@ -160,15 +184,6 @@ int main(int ac, char* av[]) {
 
     // perform posterior inference
     else if(mode == "post" && !all_nsnp.empty()) {
-       
-        // initialize parameter
-        VectorXf params(4);
-        params(0) = f00;
-        params(1) = f01;
-        params(2) = f10;
-        params(3) = f11;
-
-        // estimate the parameters
         post(all_zsc, all_sigma_sq, all_ld_mat, all_nsnp, params, templ,
             temph, nchain, nburn, nsample, lambda, max_iter_post, all_zsc_inf1,
             all_zsc_inf2, outfile, logfile);
