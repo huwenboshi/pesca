@@ -9,18 +9,13 @@
         <link rel="canonical" href="https://huwenboshi.github.io/pesca/prior/">
         <link rel="shortcut icon" href="../img/favicon.ico">
         <title>Estimating genome-wide priors - PESCA</title>
-        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
 
         <script src="../js/jquery-1.10.2.min.js" defer></script>
-        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="../js/bootstrap.min.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script>
         <script>
@@ -35,68 +30,60 @@
     </head>
 
     <body>
-
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-
-                <!-- Collapsed navigation -->
-                <div class="navbar-header">
-                    <!-- Expander button -->
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="..">PESCA</a>
-                </div>
+                <a class="navbar-brand" href="..">PESCA</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
                 <!-- Expanded navigation -->
-                <div class="navbar-collapse collapse">
+                <div id="navbar-collapse" class="navbar-collapse collapse">
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
-                            <li >
-                                <a href="..">Home</a>
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Home</a>
                             </li>
-                            <li >
-                                <a href="../input_format/">Input Format</a>
+                            <li class="navitem">
+                                <a href="../input_format/" class="nav-link">Input Format</a>
                             </li>
                             <li class="dropdown active">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Estimation <b class="caret"></b></a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Estimation <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
-<li class="active">
-    <a href="./">Estimating genome-wide priors</a>
+<li>
+    <a href="./" class="dropdown-item active">Estimating genome-wide priors</a>
 </li>
                                     
-<li >
-    <a href="../posterior/">Estimating per-SNP posteriors</a>
+<li>
+    <a href="../posterior/" class="dropdown-item">Estimating per-SNP posteriors</a>
 </li>
                                 </ul>
                             </li>
-                            <li >
-                                <a href="../faq/">FAQ</a>
+                            <li class="navitem">
+                                <a href="../faq/" class="nav-link">FAQ</a>
                             </li>
                         </ul>
 
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
-                            <li >
-                                <a rel="next" href="../input_format/">
+                            <li class="nav-item">
+                                <a rel="prev" href="../input_format/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
-                            <li >
-                                <a rel="prev" href="../posterior/">
+                            <li class="nav-item">
+                                <a rel="next" href="../posterior/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
-                            <li>
-                                <a href="https://github.com/huwenboshi/pesca"><i class="fa fa-github"></i> GitHub</a>
+                            <li class="nav-item">
+                                <a href="https://github.com/huwenboshi/pesca" class="nav-link"><i class="fa fa-github"></i> GitHub</a>
                             </li>
                     </ul>
                 </div>
@@ -104,16 +91,26 @@
         </div>
 
         <div class="container">
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#estimating-genome-wide-proportion-of-population-specific-and-shared-causal-variants">Estimating genome-wide proportion of population-specific and shared causal variants</a></li>
-            <li><a href="#step-0-estimate-genome-wide-heritability-of-the-trait">Step 0: estimate genome-wide heritability of the trait</a></li>
-            <li><a href="#step-1-extract-summary-statistics-and-ld-of-each-region-for-each-chromosome">Step 1: extract summary statistics and LD of each region for each chromosome</a></li>
-            <li><a href="#step-2-run-pesca-for-each-chromosome">Step 2: run PESCA for each chromosome</a></li>
-            <li><a href="#step-3-aggregate-results-from-all-chromosomes">Step 3: aggregate results from all chromosomes</a></li>
-    </ul>
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#estimating-genome-wide-proportion-of-population-specific-and-shared-causal-variants" class="nav-link">Estimating genome-wide proportion of population-specific and shared causal variants</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
 </div></div>
-                <div class="col-md-9" role="main">
+                    <div class="col-md-9" role="main">
 
 <h1 id="estimating-genome-wide-proportion-of-population-specific-and-shared-causal-variants">Estimating genome-wide proportion of population-specific and shared causal variants</h1>
 <p>This page describes the pipeline to estimate the genome-wide prior
@@ -149,27 +146,27 @@ Format of LD matrix can be found <a href="https://huwenboshi.github.io/pesca/inp
 </li>
 </ul>
 <p>We recommend using the following directory organization.</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&lt;</span><span class="n">trait</span> <span class="n">name</span><span class="o">&gt;/</span>
-    <span class="n">chr1</span><span class="o">/</span>
-        <span class="n">chr1_region1_zscore_pop1</span><span class="p">.</span><span class="n">txt</span>
-        <span class="n">chr1_region1_zscore_pop2</span><span class="p">.</span><span class="n">txt</span>
-        <span class="n">chr1_region1_ld_pop1</span><span class="p">.</span><span class="n">txt</span>
-        <span class="n">chr1_region1_ld_pop2</span><span class="p">.</span><span class="n">txt</span>
-        <span class="p">...</span>
-        <span class="n">chr1_region100_zscore_pop1</span><span class="p">.</span><span class="n">txt</span>
-        <span class="n">chr1_region100_zscore_pop2</span><span class="p">.</span><span class="n">txt</span>
-        <span class="n">chr1_region100_ld_pop1</span><span class="p">.</span><span class="n">txt</span>
-        <span class="n">chr1_region100_ld_pop2</span><span class="p">.</span><span class="n">txt</span>
-        <span class="p">...</span>
-        <span class="n">chr1_zscore_list_pop1</span><span class="p">.</span><span class="n">txt</span>
-        <span class="n">chr1_zscore_list_pop2</span><span class="p">.</span><span class="n">txt</span>
-        <span class="n">chr1_ld_list_pop1</span><span class="p">.</span><span class="n">txt</span>
-        <span class="n">chr1_ld_list_pop2</span><span class="p">.</span><span class="n">txt</span>
-    <span class="n">chr2</span><span class="o">/</span>
-        <span class="p">...</span>
-    <span class="p">...</span>
-    <span class="n">chr22</span><span class="o">/</span>
-        <span class="p">...</span>
+<div class="codehilite"><pre><span></span><code><span class="err">&lt;trait name&gt;/</span>
+<span class="err">    chr1/</span>
+<span class="err">        chr1_region1_zscore_pop1.txt</span>
+<span class="err">        chr1_region1_zscore_pop2.txt</span>
+<span class="err">        chr1_region1_ld_pop1.txt</span>
+<span class="err">        chr1_region1_ld_pop2.txt</span>
+<span class="err">        ...</span>
+<span class="err">        chr1_region100_zscore_pop1.txt</span>
+<span class="err">        chr1_region100_zscore_pop2.txt</span>
+<span class="err">        chr1_region100_ld_pop1.txt</span>
+<span class="err">        chr1_region100_ld_pop2.txt</span>
+<span class="err">        ...</span>
+<span class="err">        chr1_zscore_list_pop1.txt</span>
+<span class="err">        chr1_zscore_list_pop2.txt</span>
+<span class="err">        chr1_ld_list_pop1.txt</span>
+<span class="err">        chr1_ld_list_pop2.txt</span>
+<span class="err">    chr2/</span>
+<span class="err">        ...</span>
+<span class="err">    ...</span>
+<span class="err">    chr22/</span>
+<span class="err">        ...</span>
 </code></pre></div>
 
 
@@ -203,20 +200,20 @@ population 1. <code>chr1_ld_list_pop2.txt</code> is a list of paths to all the
 <p>PESCA estimates genome-wide proportions of population-specific and shared
 causal variants via the following command. This step could be run for each
 chromosome in parallel.</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&lt;</span><span class="nv">directory</span> <span class="nv">to</span> <span class="nv">pesca</span><span class="o">&gt;/</span><span class="nv">pesca</span> \
-    <span class="o">--</span><span class="nv">mode</span> <span class="nv">fit</span> \
-    <span class="o">--</span><span class="nv">zscore1</span> <span class="o">&lt;</span><span class="nv">list</span> <span class="nv">of</span> <span class="nv">GWAS</span> <span class="nv">summary</span> <span class="nv">statistics</span> <span class="nv">files</span> <span class="k">for</span> <span class="nv">population</span> <span class="mi">1</span><span class="o">&gt;</span> \
-    <span class="o">--</span><span class="nv">zscore2</span> <span class="o">&lt;</span><span class="nv">list</span> <span class="nv">of</span> <span class="nv">GWAS</span> <span class="nv">summary</span> <span class="nv">statistics</span> <span class="nv">files</span> <span class="k">for</span> <span class="nv">population</span> <span class="mi">2</span><span class="o">&gt;</span> \
-    <span class="o">--</span><span class="nv">ld1</span> <span class="o">&lt;</span><span class="nv">list</span> <span class="nv">of</span> <span class="nv">LD</span> <span class="nv">files</span> <span class="k">for</span> <span class="nv">population</span> <span class="mi">1</span><span class="o">&gt;</span> \
-    <span class="o">--</span><span class="nv">ld2</span> <span class="o">&lt;</span><span class="nv">list</span> <span class="nv">of</span> <span class="nv">LD</span> <span class="nv">files</span> <span class="k">for</span> <span class="nv">population</span> <span class="mi">2</span><span class="o">&gt;</span> \
-    <span class="o">--</span><span class="nv">nburn</span> <span class="o">&lt;</span><span class="nv">number</span> <span class="nv">of</span> <span class="nv">MCMC</span> <span class="nv">burn</span><span class="o">-</span><span class="nv">ins</span>, <span class="mi">5000</span> <span class="nv">by</span> <span class="nv">default</span><span class="o">&gt;</span> \
-    <span class="o">--</span><span class="nv">nsample</span> <span class="o">&lt;</span><span class="nv">number</span> <span class="nv">of</span> <span class="nv">MCMC</span> <span class="nv">samples</span>, <span class="mi">5000</span> <span class="nv">by</span> <span class="nv">default</span><span class="o">&gt;</span> \
-    <span class="o">--</span><span class="nv">lambda</span> <span class="o">&lt;</span><span class="nv">shrinkage</span> <span class="nv">parameter</span>, <span class="mi">0</span>.<span class="mi">0001</span> <span class="nv">by</span> <span class="nv">default</span><span class="o">&gt;</span> \
-    <span class="o">--</span><span class="nv">sigmasq1</span> <span class="o">&lt;</span><span class="nv">sample</span> <span class="nv">size</span> <span class="nv">times</span> <span class="nv">heritability</span> <span class="nv">in</span> <span class="nv">population</span> <span class="mi">1</span><span class="o">&gt;</span> \
-    <span class="o">--</span><span class="nv">sigmasq2</span> <span class="o">&lt;</span><span class="nv">sample</span> <span class="nv">size</span> <span class="nv">times</span> <span class="nv">heritability</span> <span class="nv">in</span> <span class="nv">population</span> <span class="mi">1</span><span class="o">&gt;</span> \
-    <span class="o">--</span><span class="nv">totnsnp</span> <span class="o">&lt;</span><span class="nv">total</span> <span class="nv">number</span> <span class="nv">of</span> <span class="nv">SNPs</span> <span class="nv">across</span> <span class="nv">all</span> <span class="nv">chromosomes</span><span class="o">&gt;</span> \
-    <span class="o">--</span><span class="nv">max_iter</span> <span class="o">&lt;</span><span class="nv">maximum</span> <span class="nv">number</span> <span class="nv">of</span> <span class="nv">EM</span> <span class="nv">iterations</span><span class="o">&gt;</span> \
-    <span class="o">--</span><span class="nv">out</span> <span class="o">&lt;</span><span class="nv">output</span> <span class="nv">file</span> <span class="nv">name</span><span class="o">&gt;</span><span class="nv">_chr</span><span class="o">&lt;</span><span class="nv">chromosome</span> #<span class="o">&gt;</span>
+<div class="codehilite"><pre><span></span><code><span class="err">&lt;directory to pesca&gt;/pesca \</span>
+<span class="err">    --mode fit \</span>
+<span class="err">    --zscore1 &lt;list of GWAS summary statistics files for population 1&gt; \</span>
+<span class="err">    --zscore2 &lt;list of GWAS summary statistics files for population 2&gt; \</span>
+<span class="err">    --ld1 &lt;list of LD files for population 1&gt; \</span>
+<span class="err">    --ld2 &lt;list of LD files for population 2&gt; \</span>
+<span class="err">    --nburn &lt;number of MCMC burn-ins, 5000 by default&gt; \</span>
+<span class="err">    --nsample &lt;number of MCMC samples, 5000 by default&gt; \</span>
+<span class="err">    --lambda &lt;shrinkage parameter, 0.0001 by default&gt; \</span>
+<span class="err">    --sigmasq1 &lt;sample size times heritability in population 1&gt; \</span>
+<span class="err">    --sigmasq2 &lt;sample size times heritability in population 1&gt; \</span>
+<span class="err">    --totnsnp &lt;total number of SNPs across all chromosomes&gt; \</span>
+<span class="err">    --max_iter &lt;maximum number of EM iterations&gt; \</span>
+<span class="err">    --out &lt;output file name&gt;_chr&lt;chromosome #&gt;</span>
 </code></pre></div>
 
 
@@ -336,8 +333,8 @@ This script uses the average of the last 50 iterations of the log file to
 estimate genome-wide number of null SNPs (not causal in both populations),
 population 1 specific causal SNPs, population 2 specific causal SNPs, and 
 shared causal SNPs. The script can be run as follows.</p>
-<div class="codehilite"><pre><span></span><code><span class="n">python3</span> <span class="o">&lt;</span><span class="n">path</span> <span class="k">to</span> <span class="n">script</span><span class="o">&gt;/</span><span class="n">parse_prior</span><span class="p">.</span><span class="n">py</span> <span class="err">\</span>
-    <span class="c1">--prefix &lt;path to results from step 2&gt;/&lt;output file name&gt;_chr</span>
+<div class="codehilite"><pre><span></span><code><span class="err">python3 &lt;path to script&gt;/parse_prior.py \</span>
+<span class="err">    --prefix &lt;path to results from step 2&gt;/&lt;output file name&gt;_chr</span>
 </code></pre></div>
 
 
@@ -358,6 +355,7 @@ f11 10.8127
 
 <p>The MVB parameters will be used for estimating the
 <a href="https://huwenboshi.github.io/pesca/posterior/">posterior probabilities</a>.</p></div>
+            </div>
         </div>
 
         <footer class="col-md-12">
@@ -374,21 +372,21 @@ f11 10.8127
         <script src="../assets/mathjaxhelper.js" defer></script>
         <script src="../search/main.js" defer></script>
 
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
-    <div class="modal-dialog">
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
             </div>
             <div class="modal-body">
                 <p>
                     From here you can search these documents. Enter
                     your search terms below.
                 </p>
-                <form role="form">
+                <form>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
                 </form>
                 <div id="mkdocs-search-results"></div>
@@ -397,12 +395,12 @@ f11 10.8127
             </div>
         </div>
     </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
             </div>
             <div class="modal-body">
               <table class="table">
