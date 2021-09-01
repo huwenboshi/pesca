@@ -21,11 +21,13 @@ for details.
 
 ### Reference
 
-* ["Localizing components of shared transethnic genetic architecture of complex traits from GWAS summary data." bioRxiv 2019](https://www.biorxiv.org/content/10.1101/858431v2)
+* ["Localizing components of shared transethnic genetic architecture of complex traits from GWAS summary data." AJHG 2020](https://www.sciencedirect.com/science/article/pii/S000292972030121X)
+
+PESCA posterior probabilities for the 9 diseases and complex traits analyzed can be downloaded [here](https://drive.google.com/file/d/1EdN4Ll3oPQmPPbKhF6VPIaYBZceU7Sr2/view?usp=sharing).
 
 ### See also
 
-* ["Population-specific causal disease effect sizes in functionally important regions impacted by selection." bioRxiv 2019](https://www.biorxiv.org/content/10.1101/803452v2)
+* ["Population-specific causal disease effect sizes in functionally important regions impacted by selection." Nature Communications 2021](https://www.nature.com/articles/s41467-021-21286-1)
 
 ---
 
